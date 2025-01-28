@@ -1,1 +1,1 @@
-# my-first-2d-game
+Using this to practice using Godot and gamedev for the first time. Probably doing it wrong lol
