@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body):
 	hide() #Player disappears when hit
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
