@@ -1,4 +1,5 @@
 extends Area2D
+signal hit 
 
 @export var speed = 400 # Pixels/sec
 var screen_size #Game window size
@@ -7,7 +8,6 @@ var screen_size #Game window size
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	hide()
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -39,3 +39,15 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 	pass
+
+
+func _on_body_entered(body: Node2D) -> void:
+	hide() #Player disappears when hit
+	hit.emit()
+	$CollisionShape2D.set_deferred("disabled", true)
+	#Disabling collision prevents it from hitting the signal multiple times. We defer it so it doesn't cause errors
+
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
